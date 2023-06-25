@@ -3,7 +3,7 @@ import argparse
 import numpy as np
 
 
-parser = argparse.ArgumentParser(description="Ball tracking using Kalman filter")
+parser = argparse.ArgumentParser(description="Ball tracking")
 parser.add_argument(
     "--input", type=str, help="path to input video file or camera index", default=0
 )
