@@ -1,26 +1,34 @@
-**Слежение за мячом с использованием фильтра Калмана**
+# Balls Tracking
 
-Этот код позволяет отслеживать желтый мяч, используя фильтр Калмана. Он применяет цветовой фильтр для обнаружения желтого мяча, находит его контур и использует центр контура в качестве измерений для обновления фильтра Калмана. Предсказанное положение мяча затем отображается с помощью синего прямоугольника на каждом кадре.
+A Python script to detect and track yellow and white balls in a video stream. The script takes advantage of OpenCV library for computer vision tasks.
 
-**Использование**
 
-Для использования этого кода потребуется установленная библиотека OpenCV. После того, как OpenCV установлен, выполните следующую команду из терминала:
+## Requirements
 
-```python ball_tracking.py --input input_video.mp4 --z 50```
+    Python 3.x
+    OpenCV
+    Numpy
 
-Вы можете заменить `input_video.mp4` на путь к вашему видеофайлу или индекс вашей камеры (по умолчанию 0). Аргумент `--z` устанавливает высоту стола (по умолчанию 50).
-Описание
+## Usage
+The script can be run from the terminal with the following command:
 
-Код выполняет следующие действия:
+bash
 
-    1.Разбор аргументов командной строки для получения входного файла видео или индекса камеры и высоты стола.
-    2.Загрузка видеофайла или открытие камеры.
-    3.Создание цветового фильтра для обнаружения желтого мяча.
-    4.Создание фильтра Калмана для отслеживания мяча с использованием центра обнаруженного контура в качестве измерений.
-    5.Обработка каждого кадра видео:
-        I.Применение цветового фильтра для обнаружения желтого мяча.
-        II.Нахождение самого большого контура и вычисление его координат центра.
-        III.Обновление фильтра Калмана новыми измерениями.
-        IV.Предсказание положения мяча и отображение синего прямоугольника на кадре.
-    6.Остановка обработки видео, когда пользователь нажимает клавишу 'q'.
-    7.Освобождение ресурсов и закрытие окна.
+`python ball_tracking.py --input <path_to_input_file_or_camera_index> --z <height_of_table> --show <True_or_False> --print_centers <True_or_False> --record <True_or_False>`
+
+The following arguments are required:
+
+    --input: path to input video file or camera index (default is 0)
+    --z: height of table in cm (default is 50)
+
+The following arguments are optional:
+
+    --show: set to True to show the window with the ball detection, False otherwise (default is False)
+    --print_centers: set to True to print the coordinates of each detected ball center on the console, False otherwise (default is False)
+    --record: set to True to record an output video file, False otherwise (default is False)
+
+
+## Functionality
+The script first applies a Gaussian blur to the input frame, then converts it to the HSV color space. Yellow and white balls are detected separately by thresholding the image using specified lower and higher HSV color values. Contours are found in the resulting binary images, and bounding boxes are drawn around the contours that have an area within a specified range.
+
+The script can also record the output frames to a video file if specified.
