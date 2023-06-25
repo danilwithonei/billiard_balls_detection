@@ -2,6 +2,7 @@
 
 A Python script to detect and track yellow and white balls in a video stream. The script takes advantage of OpenCV library for computer vision tasks.
 
+![](./result.gif)
 
 ## Requirements
 
